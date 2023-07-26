@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  include Visible
+  
   def create
     @article = Article.find(params[:article_id])
     @comment = @article.comments.create(comment_params)
@@ -14,6 +16,6 @@ class CommentsController < ApplicationController
 
   private
     def comment_params
-      params.require(:comment).permit(:commenter, :body)
+      params.require(:comment).permit(:commenter, :body, :status)
     end
 end
