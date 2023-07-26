@@ -1,5 +1,4 @@
 class CommentsController < ApplicationController
-  include Visible
   
   def create
     @article = Article.find(params[:article_id])
