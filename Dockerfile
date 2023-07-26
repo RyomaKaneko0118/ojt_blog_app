@@ -1,5 +1,10 @@
-FROM ruby:3.2.0
-RUN apt-get update -qq && apt-get install -y build-essential default-mysql-client vim
+FROM ruby:2.7.8
+RUN echo "deb http://archive.debian.org/debian/ stretch main" > /etc/apt/sources.list \
+    && echo "deb http://archive.debian.org/debian-security stretch/updates main" >> /etc/apt/sources.list \
+    && apt-get update \
+    && apt-get install -y build-essential sudo && \
+    echo "rails ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/rails
+RUN apt-get install -f -y
 RUN curl -sL https://deb.nodesource.com/setup_16.x | bash
 RUN apt-get install -y nodejs
 RUN wget --quiet -O - /tmp/pubkey.gpg https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
